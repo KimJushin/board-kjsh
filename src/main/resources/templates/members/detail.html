@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>KjshBorad - Register</title>
+    <title>KjshBorad - Update Member</title>
 
     <!-- Custom fonts for this template-->
     <div th:replace="~{/main/main-fragment :: header}"></div>
@@ -28,16 +28,16 @@
                     <div class="col-lg-7">
                         <div class="p-5">
                             <div class="text-center">
-                                <h1 class="h4 text-gray-900 mb-4">Create an Account!</h1>
+                                <h1 class="h4 text-gray-900 mb-4">Check an Account!</h1>
                             </div>
-                            <form class="user" th:action="@{'/members/register'}" th:object="${member}" th:method="post">
+                            <form class="user" th:action="@{'/members/' + ${member.seq}}" th:object="${member}" th:method="put">
                                 <div class="form-group row">
-                                    <input type="text" name="name" th:field="*{name}" class="form-control form-control-user" id="exampleFirstName"
-                                            placeholder=" Name">
+                                    <input type="email" name="email" th:value="${member.email}" th:field="*{email}" class="form-control form-control-user" id="exampleInputEmail"
+                                           placeholder="Email Address" readonly>
                                 </div>
-                                <div class="form-group">
-                                    <input type="email" name="email" th:field="*{email}" class="form-control form-control-user" id="exampleInputEmail"
-                                        placeholder="Email Address">
+                                <div class="form-group row">
+                                    <input type="text" name="name" th:value="${member.name}" th:field="*{name}" class="form-control form-control-user" id="exampleFirstName"
+                                            placeholder=" Name">
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
@@ -49,7 +49,7 @@
                                             id="exampleRepeatPassword" placeholder="Repeat Password">
                                     </div>
                                 </div>
-                                <input type="submit" value="Register Account" class="btn btn-primary btn-user btn-block">
+                                <input type="submit" value="Update Account" class="btn btn-primary btn-user btn-block">
                                 <hr>
                                 <a href="../main/index.html" class="btn btn-google btn-user btn-block">
                                     <i class="fab fa-google fa-fw"></i> Register with Google
@@ -60,10 +60,12 @@
                             </form>
                             <hr>
                             <div class="text-center">
-                                <a class="small" href="forgot-password.html">Forgot Password?</a>
+                                <form class="user" th:action="@{'/members/' + ${member.seq}}" th:object="${member}" th:method="delete">
+                                    <input type="submit" value="탈퇴" />
+                                </form>
                             </div>
                             <div class="text-center">
-                                <a class="small" href="login.html">Already have an account? Login!</a>
+                                <a class="small" href="/">Go Home</a>
                             </div>
                         </div>
                     </div>
