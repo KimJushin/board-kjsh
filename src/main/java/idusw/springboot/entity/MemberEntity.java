@@ -28,5 +28,11 @@ public class MemberEntity extends BaseEntity {
     @Column(length = 20, nullable = false)
     private String pw;
 
+    //@Column(length = 20, nullable = false)
+    //private String mobile;
+
+    //@Column(length = 30, nullable = false)
+    //private String zipcode;
+
 }
 

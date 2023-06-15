@@ -19,6 +19,9 @@ public class Member {
     private String name;
     private String pw;
 
+    private String mobile;
+    private String zipcode;
+
     private LocalDateTime regDate;
     private LocalDateTime modDate;
 }

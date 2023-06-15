@@ -36,6 +36,8 @@ public class MemberServiceImpl implements MemberService {
                 .email(m.getEmail())
                 .name(m.getName())
                 .pw(m.getPw())
+                //.mobile(m.getMobile())
+                //.zipcode(m.getZipcode())
                 .build();
         if(memberRepository.save(entity) != null) // 저장 성공
             return 1;
@@ -51,6 +53,8 @@ public class MemberServiceImpl implements MemberService {
         result.setSeq(e.getSeq());
         result.setEmail(e.getEmail());
         result.setName(e.getName());
+        //result.setMobile(e.getMobile());
+        //result.setZipcode(e.getZipcode());
         return result;
     }
 
@@ -66,6 +70,8 @@ public class MemberServiceImpl implements MemberService {
                         .email(e.getEmail())
                         .name(e.getName())
                         .pw(e.getPw())
+                        //.mobile(e.getMobile())
+                        //.zipcode(e.getZipcode())
                         .regDate(e.getRegDate())
                         .modDate(e.getModDate())
                         .build();
@@ -82,6 +88,8 @@ public class MemberServiceImpl implements MemberService {
                 .email(m.getEmail())
                 .name(m.getName())
                 .pw(m.getPw())
+                //.mobile(m.getMobile())
+                //.zipcode(m.getZipcode())
                 .build();
         if(memberRepository.save(entity) != null) // 저장 성공
             return 1;
@@ -110,6 +118,15 @@ public class MemberServiceImpl implements MemberService {
             result.setName(e.getName());
         }
         return result;
+    }
+
+    @Override
+    public int checkEmail(Member m) {
+        List<MemberEntity> memberEntityList = memberRepository.getMemberEntitiesByEmail(m.getEmail());
+        if (memberEntityList.size() > 0)
+            return 1; // email 중복
+        else
+            return 0; // 0 : 사용 가능
     }
 
     @Override
@@ -166,9 +183,10 @@ public class MemberServiceImpl implements MemberService {
             conditionBuilder.or(qMemberEntity.name.contains(keyword));
         }
         /*
-        if(type.contains("p")) { // phone로 검색
-            conditionBuilder.or(qMemberEntity.phone.contains(keyword));
+        if(type.contains("p")) { // mobile로 검색
+            conditionBuilder.or(qMemberEntity.mobile.contains(keyword));
         }
+
         if(type.contains("a")) { // address로 검색
             conditionBuilder.or(qMemberEntity.address.contains(keyword));
         } // 조건을 전부 줄 수도 있으니 if else문 아님

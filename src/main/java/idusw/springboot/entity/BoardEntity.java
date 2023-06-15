@@ -17,13 +17,16 @@ public class BoardEntity extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "a201812012_board_seq_gen")
     @SequenceGenerator(sequenceName = "a201812012_board_seq", name = "a201812012_board_seq_gen", initialValue = 1, allocationSize = 1)
-    // Oracle : GenerationType.SEQUENCE, Mysql/MariaDB : GenerationType.IDENTITY, auto_increment
+    //Oracle : GenerationType.SEQUENCE, Mysql/MariaDB : GenerationType.IDENTITY, auto_increment
     private Long bno;
 
     @Column(length = 50, nullable = false)
     private String title;
     @Column(length = 1000, nullable = false)
     private String content;
+
+    private Long replyCount;
+
 
     @ManyToOne(fetch = FetchType.LAZY)
     //@JoinColumn(name = "seq")
